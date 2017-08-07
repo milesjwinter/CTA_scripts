@@ -38,9 +38,9 @@ except:
 f = h5py.File(ped_database_name,'r')
 
 #Loop through each asic
-for Nasic in xrange(1):
+for Nasic in xrange(4):
     #Loop through each channel
-    for Nchannel in xrange(14,15):
+    for Nchannel in xrange(16):
 
         print "loading pedestal woveforms for Asic %s Channel %s"%(Nasic,Nchannel)
         ped_group = f['Asic%s/Channel%s'%(Nasic,Nchannel)]
@@ -74,8 +74,8 @@ for Nasic in xrange(1):
                     sys.stdout.flush()
 
                 b = block[i]
-                #p = phase[i] #use this for backplane
-                p = phase[i]/8 #use this for testerboard
+                p = phase[i] #use this for backplane
+                #p = phase[i]/8 #use this for testerboard
                 #p = (phase[i]-4)/8 #or use this for testerboard
                 pedestal = ped_group['Block%s/Phase%s'%(b,p)] 
                 samples[i,:] = raw_samples[i]-pedestal
