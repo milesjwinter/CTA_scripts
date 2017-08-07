@@ -22,7 +22,7 @@ runs = [320254]          #Run number(s) of calibration data
 indir = "./run_files/"   #Directory with run files
 Nblocks = 8              #Number of blocks read out
 Ncells = Nblocks*32      #Total number of cells
-nPhases = 4              #Number of phases
+nPhases = 32             #Number of phases
 
 
 #------------------------------------------------------------------------#
@@ -47,9 +47,9 @@ if os.path.isfile(outfile)==True:
 f = h5py.File(outfile,"w")
 
 #Loop through each asic
-for Nasic in xrange(1):
+for Nasic in xrange(4):
     #Loop through each channel
-    for Nchannel in xrange(14,15):
+    for Nchannel in xrange(16):
         print "Processing Asic %s Channel %s"%(Nasic,Nchannel)
 
         #create arrays to hold pedestals
@@ -79,9 +79,9 @@ for Nasic in xrange(1):
                     sys.stdout.flush()
 
                 b = block[q]
-                #p = phase[q]  #use this for backplane
+                p = phase[q]  #use this for backplane
                 #p = (phase[q]-4)/8  #use this for testerboard
-                p = phase[q]/8     #or use this for testerboard
+                #p = phase[q]/8     #or use this for testerboard
                 if np.amin(samples[q])>100.:  #Reject events with data spikes
                     avg_pedestal[b,p,:] += samples[q,:]
                     counts[b,p] += 1.
