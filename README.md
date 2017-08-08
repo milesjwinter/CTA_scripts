@@ -1,2 +1,2 @@
 # CTA_scripts
-polished scripts for cta analysis
+Scripts for cta analysis
